@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ProjectCard from './components/ProjectCard'
+import ProjectCard from './components/ProjectCard/ProjectCard'
 
 export default function Home() {
   return (

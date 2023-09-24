@@ -17,3 +17,5 @@ A tutorial with [mosh](https://youtu.be/ZVnjOPwW4ZA?si=dVyrj5JZYW3L98c6)
 - Static pages will be cached and rendered once at build time
     - Next.js automatically decides to render pages statically if no data is changing. So if a fetch is made and not cached then the page will be rendered at request time instead. (dynamic page)
     - with `npm run build` we can see which pages are rendered statically
+- By making `ComponentName.module.css` files in the folder for that component we can make css styles that won't clash
+- css modules are Java script objects so we can't use hyphens bc JSON attributes can't have hyphens ie. `.card-container` should be `.cardContainer`
