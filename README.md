@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Notes
+A tutorial with [mosh](https://youtu.be/ZVnjOPwW4ZA?si=dVyrj5JZYW3L98c6)
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `npx create-next-app@latest`
+- `<Link>` will make much fewer requests because it only gets the new content, as opposed to `<a>`
+- if a component needs user interaction or should be dynamically responding to user input and state then it needs to be client-side-rendered
+    - Otherwise most components should be server-side-rendered
+    - If a component needs to be client-side try to isolate the user / state interactive part and make that subcomponent client-side
+    - More server side code means a faster, less memory, more SEO optimized website
+- only page.tsx files are public. (ie. the user can't do link/users/secret.jpg)
+- to make a component client-side-rendered add `'use client';` at the top of the file
+    - all dependency components will also use client side rendering
+- try to fetch data in the server side to avoid roundtrip to the backend.
+- Next caches fetched data (may be problematic if the data is expected to change)
+    - if data is supposed to change you can set a fresh time (how long cached data should be considered valid)
+    -  `fetch(url, {cache: 'no-store'})` will not cache, and `fetch(url, {next: {revalidate: 10}})` will need to revalidate data every 10 seconds
+- Static pages will be cached and rendered once at build time
+    - Next.js automatically decides to render pages statically if no data is changing. So if a fetch is made and not cached then the page will be rendered at request time instead. (dynamic page)
+    - with `npm run build` we can see which pages are rendered statically
